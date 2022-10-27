@@ -1,0 +1,22 @@
+config:
+  target: "http://192.168.100.2"
+  phases:
+    - duration: 30
+      arrivalRate: 5
+      name: Tranqui
+    - duration: 30
+      arrivalRate: 10
+      rampTo: 100
+      name: Subiendo Carga
+    - duration: 60
+      arrivalRate: 200
+      maxVusers: 1000
+      name: Carga sostenida
+scenarios:
+  - name: "Load"
+    flow:
+      - get:
+          url: "/"
+          capture:
+            - json: "$.data_pid"
+              as: "pid"
